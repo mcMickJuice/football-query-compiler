@@ -43,6 +43,27 @@ function tokenizerImpl(query) {
       continue;
     }
 
+    if(predicates.isIn(current)) {
+      const inToken = builders.buildInToken()
+      tokens.push(inToken)
+
+      continue;
+    }
+
+    if(predicates.isBy(current)){
+      const byToken = builders.buildByToken()
+      tokens.push(byToken)
+
+      continue
+    }
+
+    if(predicates.isGrouping(current)) {
+      const groupingToken = builders.buildGroupingToken(current);
+      tokens.push(groupingToken)
+
+      continue
+    }
+
     const stringLiteralToken = builders.buildStringLiteralToken(current)
     tokens.push(stringLiteralToken)
   }

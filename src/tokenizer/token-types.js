@@ -4,5 +4,8 @@ module.exports = {
   And: 'And',
   For: 'For',
   NumericLiteral: 'NumericLiteral',
-  Through: 'Through'
+  Through: 'Through',
+  In: 'In',
+  By: 'By',
+  Grouping: 'Grouping'
 }

@@ -1,5 +1,16 @@
 const tokenizer = require('tokenizer')
-const { NumericLiteral, And, Through } = require('tokenizer/token-types')
+const { NumericLiteral, And, Through, In } = require('tokenizer/token-types')
+
+test('should have In', () => {
+  const query = 'in 2007';
+
+  const tokens = tokenizer(query)
+
+  expect(tokens).toMatchObject([
+    {type: In},
+    {type: NumericLiteral, value: 2007}
+  ])
+})
 
 test('should have NumericLiteral', () => {
   const query = '2007';

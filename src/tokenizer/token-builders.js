@@ -1,4 +1,12 @@
-const { StringLiteral, StatType, And, For, NumericLiteral, Through } = require('./token-types')
+const { StringLiteral,
+  StatType,
+  And,
+  For,
+  NumericLiteral,
+  Through,
+  In,
+  By,
+  Grouping } = require('./token-types')
 
 module.exports.buildThroughToken = function buildThroughToken() {
   return {
@@ -35,6 +43,25 @@ module.exports.buildStringLiteralToken = function buildStringLiteralToken(value)
 module.exports.buildStatTypeToken = function buildStatTypeToken(value) {
   return {
     type: StatType,
+    value: value.toLowerCase()
+  }
+}
+
+module.exports.buildInToken = function buildInToken() {
+  return {
+    type: In
+  }
+}
+
+module.exports.buildByToken = function buildByToken() {
+  return {
+    type: By
+  }
+}
+
+module.exports.buildGroupingToken = function buildGroupingToken(value) {
+  return {
+    type: Grouping,
     value
   }
 }
