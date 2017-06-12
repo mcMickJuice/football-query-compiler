@@ -1,38 +1,17 @@
 const parser = require('parser')
+const {mergeWithBase, subjectTokens} = require('./utility')
 
 const {
-  SelectStatement,
-  StringLiteral,
   TimeRange,
   NumericLiteral
 } = require('parser/node-types')
 
 const {
-  buildStringLiteralToken,
   buildInToken,
   buildNumericLiteralToken,
   buildAndToken,
   buildThroughToken
 } = require('tokenizer/token-builders')
-
-const subjectTokens = [
-  buildStringLiteralToken('Aaron'),
-  buildStringLiteralToken('Rodgers')
-]
-
-const subjectValue = 'Aaron Rodgers';
-
-const baseQuery = {
-  [SelectStatement]: {
-    type: SelectStatement,
-    subject: {
-      type: StringLiteral,
-      value: subjectValue
-    }
-  }
-}
-
-const mergeWithBase = obj => Object.assign({}, baseQuery, obj)
 
 test('should return subject with time range', () => {
   const tokens = [

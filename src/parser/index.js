@@ -3,7 +3,9 @@ const {
   SelectStatement,
   StatType,
   TimeRange,
-  NumericLiteral
+  NumericLiteral,
+  GroupingCriteria,
+  GroupingValue
 } = require('./node-types')
 
 const tokenTypes = require('../tokenizer/token-types')
@@ -18,11 +20,12 @@ function parser(tokens) {
   let idx = 0;
   let subjectString = ''
 
+  //is this while loop necessary?  We're already listing this stuff sequentially
   while (idx < tokens.length) {
     let current = tokens[idx]
 
+    //stat type mode
     if (current.type === tokenTypes.StatType) {
-      //build up stat types
       const statTypeStrings = []
       while (current.type === tokenTypes.StatType) {
         statTypeStrings.push(current.value)
@@ -39,6 +42,7 @@ function parser(tokens) {
       }))
     }
 
+    //Subject mode
     while (current && current.type === tokenTypes.StringLiteral) {
       subjectString += current.value + ' ';
       current = tokens[++idx]
@@ -49,9 +53,9 @@ function parser(tokens) {
       value: subjectString.trim()
     }
 
+    // time range mode
     if (current && current.type === tokenTypes.In) {
-      // time range mode
-      //skip the for
+      //skip the in
       current = tokens[++idx]
       const yearRawValues = []
       if (current.type !== tokenTypes.NumericLiteral) {
@@ -89,7 +93,24 @@ function parser(tokens) {
       }
     }
 
+    //Grouping mode
+    if (current && current.type === tokenTypes.By) {
+      //skip the by
+      current = tokens[++idx]
+      if (current == null || current.type !== tokenTypes.Grouping) {
+        throw new Error('grouping value not provided for GroupingCriteria')
+      }
 
+      const groupingValue = current.value;
+
+      ast[GroupingCriteria] = {
+        type: GroupingCriteria,
+        grouping: {
+          type: GroupingValue,
+          value: groupingValue
+        }
+      }
+    }
 
     idx++;
   }

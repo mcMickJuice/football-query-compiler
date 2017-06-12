@@ -3,5 +3,7 @@ module.exports = {
   SelectStatement: 'SelectStatement',
   StatType: 'StatType',
   TimeRange: 'TimeRange',
-  NumericLiteral: 'NumericLiteral'
+  NumericLiteral: 'NumericLiteral',
+  GroupingCriteria: 'GroupingCriteria',
+  GroupingValue: 'GroupingValue'
 }
