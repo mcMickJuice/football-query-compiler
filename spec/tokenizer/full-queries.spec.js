@@ -129,7 +129,7 @@ test('query by player for stat types in date range by week', () => {
     { type: StatType, value: 'passing' },
     { type: And },
     { type: StatType, value: 'receiving' },
-    {type: For},
+    { type: For },
     { type: StringLiteral, value: 'Aaron' },
     { type: StringLiteral, value: 'Rodgers' },
     { type: In },
