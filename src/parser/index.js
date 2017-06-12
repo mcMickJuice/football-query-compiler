@@ -12,7 +12,7 @@ const tokenTypes = require('../tokenizer/token-types')
 
 function parser(tokens) {
   const ast = {
-    [SelectStatement]: {
+    select: {
       type: SelectStatement
     }
   }
@@ -36,7 +36,7 @@ function parser(tokens) {
         }
       }
 
-      ast[SelectStatement].statTypes = statTypeStrings.map(value => ({
+      ast.select.statTypes = statTypeStrings.map(value => ({
         type: StatType,
         value
       }))
@@ -48,7 +48,7 @@ function parser(tokens) {
       current = tokens[++idx]
     }
 
-    ast[SelectStatement].subject = {
+    ast.select.subject = {
       type: StringLiteral,
       value: subjectString.trim()
     }
@@ -83,7 +83,7 @@ function parser(tokens) {
         }
       }
 
-      ast[TimeRange] = {
+      ast.timeRange = {
         type: TimeRange,
         rangeType,
         years: yearRawValues.map(value => ({
@@ -103,7 +103,7 @@ function parser(tokens) {
 
       const groupingValue = current.value;
 
-      ast[GroupingCriteria] = {
+      ast.grouping = {
         type: GroupingCriteria,
         grouping: {
           type: GroupingValue,

@@ -21,7 +21,7 @@ test('should return SelectStatement AST with player query', () => {
   const result = parser(tokens)
 
   expect(result).toMatchObject({
-    [SelectStatement]: {
+    select: {
       type: SelectStatement,
       subject: {
         type: StringLiteral,
@@ -41,7 +41,7 @@ test('should return SelectStatement and one StatType', () => {
   const result = parser(tokens)
 
   expect(result).toMatchObject({
-    [SelectStatement]: {
+    select: {
       type: SelectStatement,
       subject: {
         type: StringLiteral,
@@ -69,7 +69,7 @@ test('should return SelectStatement and multiple stat types', () => {
   const result = parser(tokens)
 
   expect(result).toMatchObject({
-    [SelectStatement]: {
+    select: {
       type: SelectStatement,
       subject: {
         type: StringLiteral,

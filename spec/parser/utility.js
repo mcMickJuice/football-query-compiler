@@ -11,7 +11,7 @@ const {
 const subjectValue = 'Aaron Rodgers';
 
 const baseQuery = {
-  [SelectStatement]: {
+  select: {
     type: SelectStatement,
     subject: {
       type: StringLiteral,

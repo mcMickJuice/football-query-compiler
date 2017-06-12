@@ -1,5 +1,5 @@
 const parser = require('parser')
-const {mergeWithBase, subjectTokens} = require('./utility')
+const { mergeWithBase, subjectTokens } = require('./utility')
 
 const {
   TimeRange,
@@ -23,7 +23,7 @@ test('should return subject with time range', () => {
   const result = parser(tokens);
 
   expect(result).toMatchObject(mergeWithBase({
-    [TimeRange]: {
+    timeRange: {
       type: TimeRange,
       rangeType: null,
       years: [
@@ -47,7 +47,7 @@ test('should return subject with time range with And range', () => {
   const result = parser(tokens);
 
   expect(result).toMatchObject(mergeWithBase({
-    [TimeRange]: {
+    timeRange: {
       type: TimeRange,
       rangeType: 'And',
       years: [
@@ -71,7 +71,7 @@ test('should return subject with time range with Through range', () => {
   const result = parser(tokens);
 
   expect(result).toMatchObject(mergeWithBase({
-    [TimeRange]: {
+    timeRange: {
       type: TimeRange,
       rangeType: 'Through',
       years: [
