@@ -58,7 +58,7 @@ function parser(tokens) {
       //skip the in
       current = tokens[++idx]
       const yearRawValues = []
-      if (current.type !== tokenTypes.NumericLiteral) {
+      if (current == null || current.type !== tokenTypes.NumericLiteral) {
         throw new Error('Non numeric literal found in first position of timeRange')
       }
 
@@ -105,10 +105,7 @@ function parser(tokens) {
 
       ast.grouping = {
         type: GroupingCriteria,
-        grouping: {
-          type: GroupingValue,
-          value: groupingValue
-        }
+        value: groupingValue
       }
     }
 

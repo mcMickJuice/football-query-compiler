@@ -4,6 +4,5 @@ module.exports = {
   StatType: 'StatType',
   TimeRange: 'TimeRange',
   NumericLiteral: 'NumericLiteral',
-  GroupingCriteria: 'GroupingCriteria',
-  GroupingValue: 'GroupingValue'
+  GroupingCriteria: 'GroupingCriteria'
 }

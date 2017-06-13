@@ -1,6 +1,6 @@
 const parser = require('parser')
 const { mergeWithBase, subjectTokens } = require('./utility')
-const { GroupingCriteria, GroupingValue } = require('parser/node-types')
+const { GroupingCriteria } = require('parser/node-types')
 const { buildByToken, buildGroupingToken } = require('tokenizer/token-builders')
 
 test('should return subject with grouping', () => {
@@ -15,10 +15,7 @@ test('should return subject with grouping', () => {
   expect(result).toMatchObject(mergeWithBase({
     grouping: {
       type: GroupingCriteria,
-      grouping: {
-        type: GroupingValue,
-        value: 'year'
-      }
+      value: 'year'
     }
   }))
 })
