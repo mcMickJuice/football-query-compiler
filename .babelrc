@@ -1,11 +1,21 @@
 {
-  "plugins": [
-    ["module-resolver", {
-      "root": ["./src"],
-      "alias": {
-        "tokenizer": "./tokenizer",
-        "parser": "./parser"
-      }
-    }]
-  ]
+  "env": {
+    "test": {
+      "plugins": [
+        [
+          "module-resolver",
+          {
+            "root": [
+              "./src"
+            ],
+            "alias": {
+              "tokenizer": "./tokenizer",
+              "parser": "./parser",
+              "traverser": "./traverser"
+            }
+          }
+        ]
+      ]
+    }
+  }
 }
