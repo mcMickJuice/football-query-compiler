@@ -62,6 +62,6 @@ module.exports.buildByToken = function buildByToken() {
 module.exports.buildGroupingToken = function buildGroupingToken(value) {
   return {
     type: Grouping,
-    value
+    value: value.toLowerCase()
   }
 }

@@ -11,7 +11,8 @@ module.exports = {
     "rules": {
         "indent": [
             "error",
-            2
+            2,
+            {"SwitchCase", 2}
         ],
         "linebreak-style": [
             "error",

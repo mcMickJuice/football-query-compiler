@@ -1,9 +1,9 @@
 module.exports = {
-  StringLiteral: 'StringLiteral',
+  Program: 'Program',
   SelectStatement: 'SelectStatement',
   StatType: 'StatType',
-  TimeRange: 'TimeRange',
-  NumericLiteral: 'NumericLiteral',
   GroupingCriteria: 'GroupingCriteria',
-  Program: 'Program'
+  TimeRange: 'TimeRange',
+  StringLiteral: 'StringLiteral',
+  NumericLiteral: 'NumericLiteral'
 }

@@ -20,6 +20,13 @@ function traverser(ast, visitor) {
       case Program:
         traverseArray(node.body)
         break
+      case SelectStatement:
+        traverseNode(node.subject)
+        traverseArray(node.statTypes || [])
+        break
+      case TimeRange:
+        traverseArray(node.years || [])
+        break
       default:
         break
     }
