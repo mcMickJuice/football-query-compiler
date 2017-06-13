@@ -1,7 +1,8 @@
 const {
   StringLiteral,
   SelectStatement,
-  StatType
+  StatType,
+  Program
 } = require('parser/node-types')
 
 const parser = require('parser')
@@ -21,13 +22,14 @@ test('should return SelectStatement AST with player query', () => {
   const result = parser(tokens)
 
   expect(result).toMatchObject({
-    select: {
+    type: Program,
+    body: [{
       type: SelectStatement,
       subject: {
         type: StringLiteral,
         value: 'Aaron Rodgers'
       }
-    }
+    }]
   })
 })
 
@@ -41,7 +43,8 @@ test('should return SelectStatement and one StatType', () => {
   const result = parser(tokens)
 
   expect(result).toMatchObject({
-    select: {
+    type: Program,
+    body: [{
       type: SelectStatement,
       subject: {
         type: StringLiteral,
@@ -53,7 +56,7 @@ test('should return SelectStatement and one StatType', () => {
           value: 'passing'
         }
       ]
-    }
+    }]
   })
 })
 
@@ -69,7 +72,8 @@ test('should return SelectStatement and multiple stat types', () => {
   const result = parser(tokens)
 
   expect(result).toMatchObject({
-    select: {
+    type: Program,
+    body: [{
       type: SelectStatement,
       subject: {
         type: StringLiteral,
@@ -85,6 +89,6 @@ test('should return SelectStatement and multiple stat types', () => {
           value: 'rushing'
         }
       ]
-    }
+    }]
   })
 })

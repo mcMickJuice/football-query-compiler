@@ -23,13 +23,11 @@ test('should return subject with time range', () => {
   const result = parser(tokens);
 
   expect(result).toMatchObject(mergeWithBase({
-    timeRange: {
-      type: TimeRange,
-      rangeType: null,
-      years: [
-        { type: NumericLiteral, value: 2011 }
-      ]
-    }
+    type: TimeRange,
+    rangeType: null,
+    years: [
+      { type: NumericLiteral, value: 2011 }
+    ]
   }))
 })
 
@@ -47,15 +45,13 @@ test('should return subject with time range with And range', () => {
   const result = parser(tokens);
 
   expect(result).toMatchObject(mergeWithBase({
-    timeRange: {
-      type: TimeRange,
-      rangeType: 'And',
-      years: [
-        { type: NumericLiteral, value: 2011 },
-        { type: NumericLiteral, value: 2012 },
-        { type: NumericLiteral, value: 2013 }
-      ]
-    }
+    type: TimeRange,
+    rangeType: 'And',
+    years: [
+      { type: NumericLiteral, value: 2011 },
+      { type: NumericLiteral, value: 2012 },
+      { type: NumericLiteral, value: 2013 }
+    ]
   }))
 })
 
@@ -71,13 +67,11 @@ test('should return subject with time range with Through range', () => {
   const result = parser(tokens);
 
   expect(result).toMatchObject(mergeWithBase({
-    timeRange: {
-      type: TimeRange,
-      rangeType: 'Through',
-      years: [
-        { type: NumericLiteral, value: 2011 },
-        { type: NumericLiteral, value: 2016 },
-      ]
-    }
+    type: TimeRange,
+    rangeType: 'Through',
+    years: [
+      { type: NumericLiteral, value: 2011 },
+      { type: NumericLiteral, value: 2016 },
+    ]
   }))
 })

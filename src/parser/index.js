@@ -4,7 +4,8 @@ const {
   StatType,
   TimeRange,
   NumericLiteral,
-  GroupingCriteria
+  GroupingCriteria,
+  Program
 } = require('./node-types')
 
 const tokenTypes = require('../tokenizer/token-types')
@@ -14,17 +15,16 @@ function parser(tokens) {
     throw new Error('No tokens provided to parser function')
   }
 
-  const ast = {
-    select: {
-      type: SelectStatement
-    }
-  }
+  const bodyNodes = []
 
   let idx = 0;
   let current = tokens[idx]
 
   //stat type mode
   //query starts with Stat Type
+  const select = {
+    type: SelectStatement
+  }
   if (current.type === tokenTypes.StatType) {
     const statTypeStrings = []
     while (current.type === tokenTypes.StatType) {
@@ -41,7 +41,7 @@ function parser(tokens) {
       }
     }
 
-    ast.select.statTypes = statTypeStrings.map(value => ({
+    select.statTypes = statTypeStrings.map(value => ({
       type: StatType,
       value
     }))
@@ -54,10 +54,12 @@ function parser(tokens) {
     current = tokens[++idx]
   }
 
-  ast.select.subject = {
+  select.subject = {
     type: StringLiteral,
     value: subjectString.trim()
   }
+
+  bodyNodes.push(select)
 
   // time range mode
   if (current && current.type === tokenTypes.In) {
@@ -89,14 +91,14 @@ function parser(tokens) {
       }
     }
 
-    ast.timeRange = {
+    bodyNodes.push({
       type: TimeRange,
       rangeType,
       years: yearRawValues.map(value => ({
         type: NumericLiteral,
         value
       }))
-    }
+    })
   }
 
   //Grouping mode
@@ -109,10 +111,15 @@ function parser(tokens) {
 
     const groupingValue = current.value;
 
-    ast.grouping = {
+    bodyNodes.push({
       type: GroupingCriteria,
       value: groupingValue
-    }
+    })
+  }
+
+  const ast = {
+    type: Program,
+    body: bodyNodes
   }
 
   return ast;

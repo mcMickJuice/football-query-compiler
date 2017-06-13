@@ -6,7 +6,8 @@ const {
   StatType,
   GroupingCriteria,
   TimeRange,
-  NumericLiteral
+  NumericLiteral,
+  Program
 } = require('parser/node-types')
 const tokenBuilder = require('tokenizer/token-builders')
 
@@ -25,7 +26,8 @@ test('subject query with stats by year', () => {
   const result = parser(tokens)
 
   expect(result).toMatchObject({
-    select: {
+    type: Program,
+    body: [{
       type: SelectStatement,
       subject: {
         type: StringLiteral,
@@ -36,10 +38,10 @@ test('subject query with stats by year', () => {
         { type: StatType, value: 'receiving' },
       ]
     },
-    grouping: {
+    {
       type: GroupingCriteria,
       value: 'year'
-    }
+    }]
   })
 })
 
@@ -58,24 +60,25 @@ test('subject query for year range by week', () => {
   const result = parser(tokens)
 
   expect(result).toMatchObject({
-    select: {
+    type: Program,
+    body: [{
       type: SelectStatement,
       subject: {
         type: StringLiteral,
         value: 'aaron rodgers'
       }
     },
-    timeRange: {
-      type:TimeRange,
+    {
+      type: TimeRange,
       rangeType: 'And',
       years: [
-        {type: NumericLiteral, value: 2008},
-        {type: NumericLiteral, value: 2009},
+        { type: NumericLiteral, value: 2008 },
+        { type: NumericLiteral, value: 2009 },
       ]
     },
-    grouping: {
+    {
       type: GroupingCriteria,
       value: 'week'
-    }
+    }]
   })
 })

@@ -1,6 +1,7 @@
 const {
   SelectStatement,
-  StringLiteral
+  StringLiteral,
+  Program
 } = require('parser/node-types')
 
 const {
@@ -11,13 +12,14 @@ const {
 const subjectValue = 'Aaron Rodgers';
 
 const baseQuery = {
-  select: {
+  type: Program,
+  body: [{
     type: SelectStatement,
     subject: {
       type: StringLiteral,
       value: subjectValue
     }
-  }
+  }]
 }
 
 module.exports.subjectTokens = [
@@ -25,4 +27,8 @@ module.exports.subjectTokens = [
   buildStringLiteralToken('Rodgers')
 ]
 
-module.exports.mergeWithBase = obj => Object.assign({}, baseQuery, obj)
+module.exports.mergeWithBase = obj => {
+  return Object.assign({}, baseQuery, {
+    body: [...baseQuery.body, obj]
+  })
+}

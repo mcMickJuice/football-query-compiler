@@ -13,9 +13,7 @@ test('should return subject with grouping', () => {
   const result = parser(tokens)
 
   expect(result).toMatchObject(mergeWithBase({
-    grouping: {
-      type: GroupingCriteria,
-      value: 'year'
-    }
+    type: GroupingCriteria,
+    value: 'year'
   }))
 })
