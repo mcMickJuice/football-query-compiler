@@ -1,7 +1,8 @@
 const {
   SelectStatement,
   StatType,
-  TimeRange
+  TimeRange,
+  GroupingCriteria
 } = require('../../parser/node-types')
 
 const traverser = require('../../traverser')
@@ -25,6 +26,9 @@ function transformer(ast) {
         type: node.rangeType,
         years: node.years.map(y => y.value)
       }
+    },
+    [GroupingCriteria]: node => {
+      resultObj.grouping = node.value
     }
   }
 
