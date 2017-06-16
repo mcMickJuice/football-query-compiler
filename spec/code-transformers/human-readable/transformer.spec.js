@@ -140,32 +140,6 @@ test('should have timeRange type And and years if provided', () => {
   })
 })
 
-test('should have timeRange type And and years if provided', () => {
-  const ast = getBase();
-  const select = getAaronRodgersSelect();
-
-  ast.body.push(select);
-
-  const timeRange = {
-    type: TimeRange,
-    years: [{
-      type: NumericLiteral,
-      value: 2009
-    }
-    ]
-  }
-
-  ast.body.push(timeRange)
-
-  const result = transformer(ast)
-
-  expect(result).toMatchObject({
-    timeRange: {
-      years: [2009]
-    }
-  })
-})
-
 test('should have grouping with correct type', () => {
   const ast = getBase();
   ast.body.push(getAaronRodgersSelect())

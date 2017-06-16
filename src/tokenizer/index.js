@@ -7,7 +7,6 @@ function tokenizerImpl(query) {
   const tokens = []
   let idx = 0;
   let current = null
-  let playerName = [];
 
   while (idx < querySplit.length) {
     current = querySplit[idx++];
