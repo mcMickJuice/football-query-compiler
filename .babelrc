@@ -11,7 +11,8 @@
             "alias": {
               "tokenizer": "./tokenizer",
               "parser": "./parser",
-              "traverser": "./traverser"
+              "traverser": "./traverser",
+              "code-transformers": "./code-transformers"
             }
           }
         ]
