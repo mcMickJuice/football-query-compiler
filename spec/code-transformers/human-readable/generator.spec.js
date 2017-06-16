@@ -145,8 +145,6 @@ test('should accept custom delimiter function', () => {
   const delimiterFunc = val => `<p>${val}</p>`
   const result = generator(obj, delimiterFunc)
 
-  console.log(result)
-
   expect(result.startsWith('<p>Aaron Rodgers</p>')).toBe(true)
   expect(result).toContain('<p>for 2008 and 2009</p>')
 })
