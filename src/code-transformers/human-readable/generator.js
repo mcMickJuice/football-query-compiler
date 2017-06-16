@@ -7,7 +7,6 @@
    grouping: string
  } 
  */
-const defaultDelimiter = ' ';
 
 function statTypeString(obj) {
   if (obj.statTypes != null) {
@@ -42,38 +41,39 @@ function groupingString(obj) {
   return 'by season';
 }
 
+function buildInlineWithLast(delimiter) {
+  return (val, isLast) => isLast ? val : `${val}${delimiter}`
+}
+
 function buildDelimiter(delimiter) {
   let delimiterFunc;
   if (delimiter == null) {
-    delimiterFunc = val => ` ${val}`
+    delimiterFunc = buildInlineWithLast(' ')
   } else if (typeof delimiter === 'function') {
     delimiterFunc = delimiter
   } else {
-    delimiterFunc = val => `${delimiter}${val}`
+    delimiterFunc = buildInlineWithLast(delimiter)
   }
 
   return delimiterFunc;
 }
 
 function codeTransformer(obj, delimiter) {
-  let queryStr = 'Query stats for ';
+  let queryStr = '';
 
   const applyDelimiter = buildDelimiter(delimiter);
 
   //subject
-  queryStr += obj.subject;
+  queryStr += applyDelimiter(obj.subject);
 
   //stat types
-  // queryStr += `${delimiter}${statTypeString(obj)}`
   queryStr += applyDelimiter(statTypeString(obj))
 
   //time range
-  // queryStr += `${delimiter}${timeRangeString(obj)}`
   queryStr += applyDelimiter(timeRangeString(obj))
 
   //time grouping
-  // queryStr += `${delimiter}${groupingString(obj)}`
-  queryStr += applyDelimiter(groupingString(obj))
+  queryStr += applyDelimiter(groupingString(obj), true)
 
   return queryStr;
 }

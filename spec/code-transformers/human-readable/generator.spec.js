@@ -8,7 +8,7 @@ test('should contain subject name', () => {
   const obj = getBase();
   const result = generator(obj);
 
-  expect(result).toContain(obj.subject);
+  expect(result.startsWith('Aaron Rodgers ')).toBe(true)
 })
 
 
@@ -119,8 +119,8 @@ test('should allow for custom delimiter between each query part', () => {
   const delimiter = '\r\n'
   const result = generator(obj, delimiter)
 
-  expect(result).toContain(`${delimiter}for 2008 and 2009`)
-  expect(result).toContain(`${delimiter}by week`)
+  expect(result).toContain(`for 2008 and 2009${delimiter}`)
+  expect(result).toContain('by week')
 })
 
 test('should use space as default delimiter', () => {
@@ -132,8 +132,9 @@ test('should use space as default delimiter', () => {
   const delimiter = ' '
   const result = generator(obj)
 
-  expect(result).toContain(`${delimiter}for 2008 and 2009`)
-  expect(result).toContain(`${delimiter}by week`)
+  expect(result).toContain(`for 2008 and 2009${delimiter}`)
+  //should not apply to last
+  expect(result).toContain('by week')
 })
 
 test('should accept custom delimiter function', () => {
@@ -144,5 +145,8 @@ test('should accept custom delimiter function', () => {
   const delimiterFunc = val => `<p>${val}</p>`
   const result = generator(obj, delimiterFunc)
 
+  console.log(result)
+
+  expect(result.startsWith('<p>Aaron Rodgers</p>')).toBe(true)
   expect(result).toContain('<p>for 2008 and 2009</p>')
 })
