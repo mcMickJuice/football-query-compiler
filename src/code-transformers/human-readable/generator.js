@@ -42,20 +42,38 @@ function groupingString(obj) {
   return 'by season';
 }
 
-function codeTransformer(obj, delimiter = defaultDelimiter) {
+function buildDelimiter(delimiter) {
+  let delimiterFunc;
+  if (delimiter == null) {
+    delimiterFunc = val => ` ${val}`
+  } else if (typeof delimiter === 'function') {
+    delimiterFunc = delimiter
+  } else {
+    delimiterFunc = val => `${delimiter}${val}`
+  }
+
+  return delimiterFunc;
+}
+
+function codeTransformer(obj, delimiter) {
   let queryStr = 'Query stats for ';
+
+  const applyDelimiter = buildDelimiter(delimiter);
 
   //subject
   queryStr += obj.subject;
 
   //stat types
-  queryStr += `${delimiter}${statTypeString(obj)}`
+  // queryStr += `${delimiter}${statTypeString(obj)}`
+  queryStr += applyDelimiter(statTypeString(obj))
 
   //time range
-  queryStr += `${delimiter}${timeRangeString(obj)}`
+  // queryStr += `${delimiter}${timeRangeString(obj)}`
+  queryStr += applyDelimiter(timeRangeString(obj))
 
   //time grouping
-  queryStr += `${delimiter}${groupingString(obj)}`
+  // queryStr += `${delimiter}${groupingString(obj)}`
+  queryStr += applyDelimiter(groupingString(obj))
 
   return queryStr;
 }

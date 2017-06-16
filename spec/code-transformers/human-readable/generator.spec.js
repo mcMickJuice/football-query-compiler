@@ -135,3 +135,14 @@ test('should use space as default delimiter', () => {
   expect(result).toContain(`${delimiter}for 2008 and 2009`)
   expect(result).toContain(`${delimiter}by week`)
 })
+
+test('should accept custom delimiter function', () => {
+  const obj = getBase();
+
+  obj.statTypes = [2008, 2009]
+
+  const delimiterFunc = val => `<p>${val}</p>`
+  const result = generator(obj, delimiterFunc)
+
+  expect(result).toContain('<p>for 2008 and 2009</p>')
+})
