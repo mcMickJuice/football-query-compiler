@@ -1,10 +1,6 @@
 const {
-  StringLiteral,
   SelectStatement,
-  StatType,
   TimeRange,
-  NumericLiteral,
-  GroupingCriteria,
   Program
 } = require('../parser/node-types')
 
