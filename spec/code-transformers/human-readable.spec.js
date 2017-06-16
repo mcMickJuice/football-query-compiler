@@ -83,7 +83,7 @@ test('should contain from and to year if Through is type', () => {
 
   obj.timeRange = {
     type: 'Through',
-    years: [2007,2014]
+    years: [2007, 2014]
   }
 
   const result = transformer(obj)
@@ -107,4 +107,30 @@ test('should contain by grouping value if provided', () => {
   const result = transformer(obj, '\r\n')
 
   expect(result).toContain('by week')
+})
+
+test('should allow for custom delimiter between each query part', () => {
+  const obj = getBase();
+
+  obj.statTypes = [2008, 2009]
+  obj.grouping = 'week'
+
+  const delimiter = '\r\n'
+  const result = transformer(obj, delimiter)
+
+  expect(result).toContain(`${delimiter}for 2008 and 2009`)
+  expect(result).toContain(`${delimiter}by week`)
+})
+
+test('should use space as default delimiter', () => {
+  const obj = getBase();
+
+  obj.statTypes = [2008, 2009]
+  obj.grouping = 'week'
+
+  const delimiter = ' '
+  const result = transformer(obj)
+
+  expect(result).toContain(`${delimiter}for 2008 and 2009`)
+  expect(result).toContain(`${delimiter}by week`)
 })
