@@ -5,7 +5,7 @@
     "test": "jest",
     "lint": "eslint **/*.js"
   },
-  "pre-commit": "lint",
+  "pre-commit": ["lint", "test"],
   "description": "Compiles football query",
   "main": "index.js",
   "author": "mcMickJuice",
