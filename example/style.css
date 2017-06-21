@@ -1,0 +1,12 @@
+.container {
+
+}
+
+.container > div {
+  border: 1px solid black;
+  min-height: 200px;
+}
+
+#error {
+  color: red;
+}
