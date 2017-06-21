@@ -1,6 +1,8 @@
 # football-query-compiler
 Query language for football stats
 
+## examples
+
 minimal query, query stats for player for their positions primary stat type for their career, by year
 
 `aaron rodgers`
