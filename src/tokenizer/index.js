@@ -2,6 +2,9 @@ const builders = require('./token-builders')
 const predicates = require('./token-predicates')
 
 function tokenizerImpl(query) {
+  if(query == null || query.trim() === ''){
+    throw new Error('Tokenizer Error: no query provided')
+  }
   const querySplit = query.split(' ')
 
   const tokens = []
