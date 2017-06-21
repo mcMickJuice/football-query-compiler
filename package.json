@@ -4,7 +4,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint **/*.js",
-    "build": "webpack --config ./example/webpack.config.js"
+    "start": "webpack-dev-server --config ./example/webpack.config.js"
   },
   "pre-commit": [
     "lint",
@@ -21,7 +21,8 @@
     "eslint-plugin-jest": "^20.0.3",
     "jest": "^20.0.4",
     "pre-commit": "^1.2.2",
-    "webpack": "^2.6.1"
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {}
 }
