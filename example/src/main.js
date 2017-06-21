@@ -17,8 +17,8 @@ function bootstrap() {
     compiler.compile(queryValue)
   })
 
-  compiler.on('tokens', tokens => {
-  })
+  // compiler.on('tokens', tokens => {
+  // })
 
   compiler.on('ast', ast => {
     treeView.innerHTML = ''
