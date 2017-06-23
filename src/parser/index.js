@@ -7,8 +7,18 @@ const {
   GroupingCriteria,
   Program
 } = require('./node-types')
+const QuerySyntaxError = require('./query-syntax-error')
 
 const tokenTypes = require('../tokenizer/token-types')
+
+const statTypePhaseTokens = [
+  tokenTypes.StatType,
+  tokenTypes.And,
+  tokenTypes.For
+]
+function isInvalidStatTypePhaseToken(token) {
+  return statTypePhaseTokens.indexOf(token.type) === -1
+}
 
 function parser(tokens) {
   if (tokens.length === 0) {
@@ -27,15 +37,26 @@ function parser(tokens) {
   }
   if (current.type === tokenTypes.StatType) {
     const statTypeStrings = []
-    while (current.type === tokenTypes.StatType) {
-      statTypeStrings.push(current.value)
-
-      current = tokens[++idx];
-      if (current.type === tokenTypes.And) {
-        current = tokens[++idx]
+    while (current != null) {
+      if (isInvalidStatTypePhaseToken(current)) {
+        throw new QuerySyntaxError(`Parser Error: Invalid token type ${current.type} provided in StatType Phase`)
       }
 
-      if (current != null && current.type === tokenTypes.For) {
+      if (current.type === tokenTypes.StatType) {
+        statTypeStrings.push(current.value)
+        current = tokens[++idx];
+        continue;
+      }
+
+      if (current.type === tokenTypes.And) {
+        current = tokens[++idx]
+        if (current.type !== tokenTypes.StatType) {
+          throw new QuerySyntaxError('Parser Error: Invalid Token after \'And\' expected \'StatType\'')
+        }
+        continue
+      }
+
+      if (current.type === tokenTypes.For) {
         current = tokens[++idx]
         break;
       }
@@ -48,6 +69,10 @@ function parser(tokens) {
   }
 
   //Subject mode
+  if (current == null || current.type !== tokenTypes.StringLiteral) {
+    throw new QuerySyntaxError('Parser Error: No Query Subject provided')
+  }
+
   let subjectString = ''
   while (current && current.type === tokenTypes.StringLiteral) {
     subjectString += current.value + ' ';
@@ -67,7 +92,7 @@ function parser(tokens) {
     current = tokens[++idx]
     const yearRawValues = []
     if (current == null || current.type !== tokenTypes.NumericLiteral) {
-      throw new Error('Non numeric literal found in first position of timeRange')
+      throw new QuerySyntaxError('Parser Error: Non numeric literal found in first position of timeRange')
     }
 
     //WOOF
@@ -78,13 +103,13 @@ function parser(tokens) {
 
       if (current && current.type === tokenTypes.And) {
         if (rangeType === 'Through') {
-          throw new Error('Cannot use both Through and And Range types for timeRange')
+          throw new QuerySyntaxError('Parser Error: Cannot use both Through and And Range types for timeRange')
         }
         rangeType = 'And'
         current = tokens[++idx]
       } else if (current && current.type === tokenTypes.Through) {
         if (rangeType === 'And') {
-          throw new Error('Cannot use both Through and And Range types for timeRange')
+          throw new QuerySyntaxError('Parser Error: Cannot use both Through and And Range types for timeRange')
         }
         rangeType = 'Through'
         current = tokens[++idx]
@@ -106,7 +131,7 @@ function parser(tokens) {
     //skip the by
     current = tokens[++idx]
     if (current == null || current.type !== tokenTypes.Grouping) {
-      throw new Error('grouping value not provided for GroupingCriteria')
+      throw new QuerySyntaxError('Parser Error: grouping value not provided for GroupingCriteria')
     }
 
     const groupingValue = current.value;
@@ -115,6 +140,14 @@ function parser(tokens) {
       type: GroupingCriteria,
       value: groupingValue
     })
+
+    current = tokens[++idx]
+  }
+
+
+  if (current != null) {
+    //unhandledd tokens....throw
+    throw new QuerySyntaxError('Parser Error: unhandled tokens at end of query')
   }
 
   const ast = {
