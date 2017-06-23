@@ -92,7 +92,7 @@ function parser(tokens) {
     current = tokens[++idx]
     const yearRawValues = []
     if (current == null || current.type !== tokenTypes.NumericLiteral) {
-      throw new Error('Non numeric literal found in first position of timeRange')
+      throw new QuerySyntaxError('Parser Error: Non numeric literal found in first position of timeRange')
     }
 
     //WOOF
@@ -103,13 +103,13 @@ function parser(tokens) {
 
       if (current && current.type === tokenTypes.And) {
         if (rangeType === 'Through') {
-          throw new Error('Cannot use both Through and And Range types for timeRange')
+          throw new QuerySyntaxError('Parser Error: Cannot use both Through and And Range types for timeRange')
         }
         rangeType = 'And'
         current = tokens[++idx]
       } else if (current && current.type === tokenTypes.Through) {
         if (rangeType === 'And') {
-          throw new Error('Cannot use both Through and And Range types for timeRange')
+          throw new QuerySyntaxError('Parser Error: Cannot use both Through and And Range types for timeRange')
         }
         rangeType = 'Through'
         current = tokens[++idx]
