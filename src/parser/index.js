@@ -38,7 +38,7 @@ function parser(tokens) {
   if (current.type === tokenTypes.StatType) {
     const statTypeStrings = []
     while (current != null) {
-      if(isInvalidStatTypePhaseToken(current)){
+      if (isInvalidStatTypePhaseToken(current)) {
         throw new QuerySyntaxError(`Parser Error: Invalid token type ${current.type} provided in StatType Phase`)
       }
 
@@ -50,7 +50,7 @@ function parser(tokens) {
 
       if (current.type === tokenTypes.And) {
         current = tokens[++idx]
-        if(current.type !== tokenTypes.StatType) {
+        if (current.type !== tokenTypes.StatType) {
           throw new QuerySyntaxError('Parser Error: Invalid Token after \'And\' expected \'StatType\'')
         }
         continue
@@ -131,7 +131,7 @@ function parser(tokens) {
     //skip the by
     current = tokens[++idx]
     if (current == null || current.type !== tokenTypes.Grouping) {
-      throw new Error('grouping value not provided for GroupingCriteria')
+      throw new QuerySyntaxError('Parser Error: grouping value not provided for GroupingCriteria')
     }
 
     const groupingValue = current.value;
@@ -140,6 +140,14 @@ function parser(tokens) {
       type: GroupingCriteria,
       value: groupingValue
     })
+
+    current = tokens[++idx]
+  }
+
+
+  if (current != null) {
+    //unhandledd tokens....throw
+    throw new QuerySyntaxError('Parser Error: unhandled tokens at end of query')
   }
 
   const ast = {
