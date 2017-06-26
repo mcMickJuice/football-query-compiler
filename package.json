@@ -1,17 +1,16 @@
 {
   "name": "football-query-compiler",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "test": "jest",
-    "lint": "eslint **/*.js",
-    "start": "webpack-dev-server --config ./example/webpack.config.js"
+    "lint": "eslint **/*.js"
   },
   "pre-commit": [
     "lint",
     "test"
   ],
   "description": "Compiles football query",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "mcMickJuice",
   "license": "MIT",
   "devDependencies": {
@@ -20,9 +19,7 @@
     "eslint": "^4.0.0",
     "eslint-plugin-jest": "^20.0.3",
     "jest": "^20.0.4",
-    "pre-commit": "^1.2.2",
-    "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.5.0"
+    "pre-commit": "^1.2.2"
   },
   "dependencies": {}
 }
