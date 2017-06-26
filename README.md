@@ -1,6 +1,8 @@
 # football-query-compiler
 Query language for football stats
 
+## [see the compiler in action!](https://football-query-compiler-ex.herokuapp.com/)
+
 ## examples
 
 minimal query, query stats for player for their positions primary stat type for their career, by year
