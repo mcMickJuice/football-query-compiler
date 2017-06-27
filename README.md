@@ -12,7 +12,7 @@ Query language for football stats
 [by <groupingType>]
 ```
 
-## examples
+## Examples
 
 minimal query, query stats for player for their positions primary stat type for their career, by year
 
@@ -45,11 +45,3 @@ career stats by year
 stats by year for aaron rodgers from season 2007 to 2013
 
 `aaron rodgers in 2007 through 2013 by year`
-
-
-## TODO query syntax notation for language
-
-* subject (proposition - for) 
-* year range - propsition - in (prefix)
-* stat slice (week, year) proposition - by (prefix)
-* stat type proposition - for (suffix)
