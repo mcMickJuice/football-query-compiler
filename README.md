@@ -3,6 +3,15 @@ Query language for football stats
 
 ## [see the compiler in action!](https://football-query-compiler-ex.herokuapp.com/)
 
+## Syntax
+
+```
+[<statType> [and <statType>, ...n] for]
+<Player Name>
+[in <year> {[and <year>, ...n] | [through <year>]}]
+[by <groupingType>]
+```
+
 ## examples
 
 minimal query, query stats for player for their positions primary stat type for their career, by year
