@@ -5,7 +5,9 @@ function lexer(query) {
   if(query == null || query.trim() === ''){
     throw new Error('Lexer Error: no query provided')
   }
-  const querySplit = query.split(' ')
+  
+  //prolly need to filter out carriage returns, tabs etc
+  const querySplit = query.split(' ').filter(s => s !== '')
 
   const tokens = []
   let idx = 0;
