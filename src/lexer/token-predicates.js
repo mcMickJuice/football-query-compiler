@@ -35,7 +35,7 @@ module.exports.isStatType = function isStatType(str) {
 module.exports.isNumber = function isNumber(str) {
   const number = Number(str);
 
-  return !isNaN(number);
+  return !isNaN(number) && str !== '';
 }
 
 module.exports.isIn = function isIn(str) {

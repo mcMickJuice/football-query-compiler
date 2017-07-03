@@ -69,3 +69,18 @@ test('should return tokens for entire query', () => {
     { value: 'Rodgers', type: StringLiteral }
   ])
 })
+
+test('should filter out multiple spaces', () => {
+  const query = 'passing and  rushing for Aaron Rodgers';
+
+  const tokens = lexer(query);
+
+  expect(tokens).toMatchObject([
+    { value: 'passing', type: StatType },
+    { type: And },
+    { value: 'rushing', type: StatType },
+    { type: For },
+    { value: 'Aaron', type: StringLiteral },
+    { value: 'Rodgers', type: StringLiteral }
+  ])
+})
