@@ -6,7 +6,7 @@ const {
 
 const {
   buildStringLiteralToken
-} = require('tokenizer/token-builders')
+} = require('lexer/token-builders')
 
 
 const subjectValue = 'Aaron Rodgers';

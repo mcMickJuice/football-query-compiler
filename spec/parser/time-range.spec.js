@@ -11,7 +11,7 @@ const {
   buildNumericLiteralToken,
   buildAndToken,
   buildThroughToken
-} = require('tokenizer/token-builders')
+} = require('lexer/token-builders')
 
 test('should return subject with time range', () => {
   const tokens = [

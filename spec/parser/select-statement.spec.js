@@ -11,7 +11,7 @@ const {
   buildAndToken,
   buildStatTypeToken,
   buildForToken
-} = require('tokenizer/token-builders')
+} = require('lexer/token-builders')
 
 test('should return SelectStatement AST with player query', () => {
   const tokens = [

@@ -1,5 +1,5 @@
 const parser = require('parser')
-const tokenBuilder = require('tokenizer/token-builders')
+const tokenBuilder = require('lexer/token-builders')
 const QuerySyntaxError = require('parser/query-syntax-error')
 
 test('should throw error if any tokens are at end of query', () => {

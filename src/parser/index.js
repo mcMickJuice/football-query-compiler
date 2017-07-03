@@ -9,7 +9,7 @@ const {
 } = require('./node-types')
 const QuerySyntaxError = require('./query-syntax-error')
 
-const tokenTypes = require('../tokenizer/token-types')
+const tokenTypes = require('../lexer/token-types')
 
 const statTypePhaseTokens = [
   tokenTypes.StatType,

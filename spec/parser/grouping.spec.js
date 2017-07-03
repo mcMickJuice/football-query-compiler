@@ -1,7 +1,7 @@
 const parser = require('parser')
 const { mergeWithBase, subjectTokens } = require('./utility')
 const { GroupingCriteria } = require('parser/node-types')
-const { buildByToken, buildGroupingToken } = require('tokenizer/token-builders')
+const { buildByToken, buildGroupingToken } = require('lexer/token-builders')
 
 test('should return subject with grouping', () => {
   const tokens = [

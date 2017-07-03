@@ -9,7 +9,7 @@ const {
   NumericLiteral,
   Program
 } = require('parser/node-types')
-const tokenBuilder = require('tokenizer/token-builders')
+const tokenBuilder = require('lexer/token-builders')
 
 test('subject query with stats by year', () => {
   const tokens = [

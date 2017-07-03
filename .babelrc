@@ -9,7 +9,7 @@
               "./src"
             ],
             "alias": {
-              "tokenizer": "./tokenizer",
+              "lexer": "./lexer",
               "parser": "./parser",
               "traverser": "./traverser",
               "code-transformers": "./code-transformers"

@@ -1,9 +1,9 @@
 const builders = require('./token-builders')
 const predicates = require('./token-predicates')
 
-function tokenizerImpl(query) {
+function lexer(query) {
   if(query == null || query.trim() === ''){
-    throw new Error('Tokenizer Error: no query provided')
+    throw new Error('Lexer Error: no query provided')
   }
   const querySplit = query.split(' ')
 
@@ -73,4 +73,4 @@ function tokenizerImpl(query) {
   return tokens
 }
 
-module.exports = tokenizerImpl
+module.exports = lexer

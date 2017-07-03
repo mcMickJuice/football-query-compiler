@@ -1,8 +1,8 @@
 const parser = require('./parser')
-const tokenizer = require('./tokenizer')
+const lexer = require('./lexer')
 const traverser = require('./traverser')
 
 
 module.exports.parser = parser;
-module.exports.tokenizer = tokenizer;
+module.exports.lexer = lexer;
 module.exports.traverser = traverser;

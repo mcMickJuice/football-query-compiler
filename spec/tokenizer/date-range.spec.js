@@ -1,10 +1,10 @@
-const tokenizer = require('tokenizer')
-const { NumericLiteral, And, Through, In } = require('tokenizer/token-types')
+const lexer = require('lexer')
+const { NumericLiteral, And, Through, In } = require('lexer/token-types')
 
 test('should have In', () => {
   const query = 'in 2007';
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     {type: In},
@@ -15,7 +15,7 @@ test('should have In', () => {
 test('should have NumericLiteral', () => {
   const query = '2007';
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: NumericLiteral, value: 2007 }
@@ -25,7 +25,7 @@ test('should have NumericLiteral', () => {
 test('should have NumericLiteral with And', () => {
   const query = '2007 and 2008';
 
-  const tokens = tokenizer(query);
+  const tokens = lexer(query);
 
   expect(tokens).toMatchObject([
     { type: NumericLiteral, value: 2007 },
@@ -37,7 +37,7 @@ test('should have NumericLiteral with And', () => {
 test('should support through keyword', () => {
   const query = '2007 through 2015'
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: NumericLiteral, value: 2007 },

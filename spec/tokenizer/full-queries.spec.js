@@ -1,4 +1,4 @@
-const tokenizer = require('tokenizer')
+const lexer = require('lexer')
 const { StringLiteral,
   StatType,
   And,
@@ -7,12 +7,12 @@ const { StringLiteral,
   Through,
   In,
   By,
-  Grouping } = require('tokenizer/token-types')
+  Grouping } = require('lexer/token-types')
 
 test('query by player name only', () => {
   const query = 'Aaron Rodgers'
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: StringLiteral, value: 'Aaron' },
@@ -23,7 +23,7 @@ test('query by player name only', () => {
 test('query by player name for specific stat type', () => {
   const query = 'Passing for Aaron Rodgers';
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: StatType, value: 'passing' },
@@ -37,7 +37,7 @@ test('query by player name for specific stat type', () => {
 test('query by player name for multiple stat types', () => {
   const query = 'Passing and rushing for Aaron Rodgers';
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: StatType, value: 'passing' },
@@ -52,7 +52,7 @@ test('query by player name for multiple stat types', () => {
 test('query by player name in a given year', () => {
   const query = 'Aaron Rodgers in 2007'
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: StringLiteral, value: 'Aaron' },
@@ -65,7 +65,7 @@ test('query by player name in a given year', () => {
 test('query by player name in multiple years', () => {
   const query = 'Aaron Rodgers in 2007 and 2008 and 2009'
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: StringLiteral, value: 'Aaron' },
@@ -82,7 +82,7 @@ test('query by player name in multiple years', () => {
 test('query by player name with year range', () => {
   const query = 'Aaron Rodgers in 2007 through 2015'
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: StringLiteral, value: 'Aaron' },
@@ -97,7 +97,7 @@ test('query by player name with year range', () => {
 test('query by player grouping by week', () => {
   const query = 'Aaron Rodgers by week'
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: StringLiteral, value: 'Aaron' },
@@ -110,7 +110,7 @@ test('query by player grouping by week', () => {
 test('query by player grouping by year', () => {
   const query = 'Aaron Rodgers by year'
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: StringLiteral, value: 'Aaron' },
@@ -123,7 +123,7 @@ test('query by player grouping by year', () => {
 test('query by player for stat types in date range by week', () => {
   const query = 'Passing and Receiving for Aaron Rodgers in 2008 through 2017 by week';
 
-  const tokens = tokenizer(query)
+  const tokens = lexer(query)
 
   expect(tokens).toMatchObject([
     { type: StatType, value: 'passing' },

@@ -1,19 +1,19 @@
-const tokenizer = require('tokenizer')
+const lexer = require('lexer')
 
 test('should throw Error if query is empty string', () => {
   expect(() => {
-    tokenizer('')
-  }).toThrow(/Tokenizer Error/)
+    lexer('')
+  }).toThrow(/Lexer Error/)
 })
 
 test('should throw if trimmed query is empty string', () => {
   expect(() => {
-    tokenizer('    ')
-  }).toThrow(/Tokenizer Error/)
+    lexer('    ')
+  }).toThrow(/Lexer Error/)
 })
 
 test('should throw if null query is provided', () => {
   expect(() => {
-    tokenizer()
-  }).toThrow(/Tokenizer Error/)
+    lexer()
+  }).toThrow(/Lexer Error/)
 })

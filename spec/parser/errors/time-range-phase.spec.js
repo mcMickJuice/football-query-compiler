@@ -1,5 +1,5 @@
 const parser = require('parser')
-const tokenBuilder = require('tokenizer/token-builders')
+const tokenBuilder = require('lexer/token-builders')
 const QuerySyntaxError = require('parser/query-syntax-error')
 
 const baseTokens = [
